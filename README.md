@@ -51,12 +51,11 @@ u8 key_matrix[4][4] = {
 // 一维矩阵存储按照行扫描的方式
 u8 key_cows[4] = {0x7f,0xbf,0xdf,0xef};
 
-u8 value = 0;
+u8 key_value = 0;
 
 void scan_keys()
 {
 	u8 i,j;
-	//u8 key_value = 0;
 	for(i=0;i<4;i++)
 	{
 		KEY_MATRIX_PORT = key_cows[i];
@@ -79,7 +78,7 @@ void main()
 	while(1)
 	{
 		scan_keys();
-	   	SMG_A_DP_PORT = gsmg_code[value];
+	   	SMG_A_DP_PORT = gsmg_code[key_value];
 	}		
 }
 ```
@@ -102,13 +101,12 @@ u8 key_matrix[4][4] = {
 // 一维矩阵存储按照行扫描的方式
 u8 key_cows[4] = {0x7f,0xbf,0xdf,0xef};
 
-u8 value = 0; //全局变量value，用来跨全局传递按键数字
+u8 key_value = 0; //全局变量key_value，用来跨全局传递按键数字
 
 //按键扫描函数，可循环扫描当前按下的按键位置，并将按下的按键位置信息放到全局变量value里面
 void scan_keys()
 {
 	u8 i,j;
-	//u8 key_value = 0;
 	for(i=0;i<4;i++)
 	{
 		KEY_MATRIX_PORT = key_cows[i];
@@ -126,4 +124,17 @@ void scan_keys()
 	}
 }
 
+```
+
+## 主函数内调用方法
+每次需要了解当前哪个按键按下的时候，直接将子函数scan_keys()声明即可，然后紧接着直接使用key_value这个全局变量即可知道哪个按键按下。
+```c
+void main()
+{	
+	while(1)
+	{
+		scan_keys();
+	   	SMG_A_DP_PORT = gsmg_code[key_value];//这里将按键的位置信息与数码管的显示数字信息相互对应
+	}		
+}
 ```
