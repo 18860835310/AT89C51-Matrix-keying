@@ -1,0 +1,168 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/07/2024  21:40:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL_UVISION5_MDK\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\main.obj TO .\Objects\¾ØÕó°´¼ü PRINT (.\L
+>> istings\¾ØÕó°´¼ü.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\main.obj (MAIN)
+  D:\KEIL_UVISION5_MDK\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\¾ØÕó°´¼ü (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0025H     UNIT         ?DT?MAIN
+            IDATA   002DH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0034H     UNIT         ?PR?SCAN_KEYS?MAIN
+            CODE    08C0H     002EH     UNIT         ?C_INITSEG
+            CODE    08EEH     000DH     UNIT         ?PR?MAIN?MAIN
+            CODE    08FBH     000BH     UNIT         ?PR?_DELAY_10US?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\¾ØÕó°´¼ü (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?SCAN_KEYS?MAIN
+
+?PR?SCAN_KEYS?MAIN
+  +--> ?PR?_DELAY_10US?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\¾ØÕó°´¼ü (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/07/2024  21:40:44  PAGE 2
+
+
+
+  -------         MODULE        ?C_STARTUP
+  C:0800H         SEGMENT       ?C_C51STARTUP
+  I:002DH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0803H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0800H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0800H         LINE#         133
+  C:0802H         LINE#         134
+  C:0803H         LINE#         135
+  C:0804H         LINE#         136
+  C:0806H         LINE#         185
+  C:0809H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0008H         PUBLIC        value
+  C:08EEH         PUBLIC        main
+  D:0009H         PUBLIC        gsmg_code
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:08FBH         PUBLIC        _delay_10us
+  D:0019H         PUBLIC        key_matrix
+  C:088CH         PUBLIC        scan_keys
+  D:00C8H         PUBLIC        T2CON
+  D:0029H         PUBLIC        key_cows
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY_10US
+  D:0006H         SYMBOL        ten_us
+  C:08FBH         LINE#         15
+  C:08FBH         LINE#         16
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/07/2024  21:40:44  PAGE 3
+
+
+  C:08FBH         LINE#         17
+  C:0905H         LINE#         18
+  -------         ENDPROC       _DELAY_10US
+  -------         PROC          SCAN_KEYS
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0003H         SYMBOL        j
+  -------         ENDDO         
+  C:088CH         LINE#         33
+  C:088CH         LINE#         34
+  C:088CH         LINE#         37
+  C:088EH         LINE#         38
+  C:088EH         LINE#         39
+  C:0895H         LINE#         40
+  C:0899H         LINE#         41
+  C:0899H         LINE#         42
+  C:089BH         LINE#         43
+  C:089BH         LINE#         44
+  C:08A2H         LINE#         45
+  C:08AFH         LINE#         46
+  C:08AFH         LINE#         47
+  C:08B7H         LINE#         50
+  C:08B7H         LINE#         51
+  C:08BBH         LINE#         52
+  C:08BBH         LINE#         53
+  C:08BFH         LINE#         54
+  -------         ENDPROC       SCAN_KEYS
+  -------         PROC          MAIN
+  C:08EEH         LINE#         56
+  C:08EEH         LINE#         57
+  C:08EEH         LINE#         58
+  C:08EEH         LINE#         59
+  C:08EEH         LINE#         60
+  C:08F1H         LINE#         61
+  C:08F9H         LINE#         62
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0088H BYTE ( 6%) *
+******************************************************************************
+
+Program Size: data=46.0 xdata=0 code=265
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
