@@ -13,6 +13,10 @@
 ## 矩阵电路的连接如下所示
 ![Loading](矩阵按键.png "普中-4开发板")
 
+由图可见，P1的高四位P17、P16、P15、P14，是用来判断行，
+P1的第四位P13、P12、P11、P10是用来判断列。
+当某个按键按下，则导致在这个按键交叉相连的两个端口会导通，即当这个端口中有任意一个是置低位，那么另一个读取到的数据为置低位。
+
 # 具体程序
 ## 全部程序
 先上程序，具体方法讲解后面再提
@@ -63,9 +67,7 @@ void scan_keys()
 				delay_10us(550);//消抖
 				if(KEY_MATRIX_PORT == key_matrix[i][j])
 				{
-					value = 4*i+j;
-					//SMG_A_DP_PORT = gsmg_code[4*i+j];
-					//while(KEY_MATRIX_PORT == key_cows[i]);//等待按键松开
+					key_value = 4*i+j;
 				}
 			}
 		}
@@ -82,4 +84,46 @@ void main()
 }
 ```
 
-## 程序拆分
+## 快速移植
+下面这部分是移植的时候要保留的部分
+
+```c
+typedef unsigned char u8;	//对系统默认数据类型进行重定义
+
+#define KEY_MATRIX_PORT	P1	//使用宏定义矩阵按键控制口
+// 二维矩阵存储按键状态
+u8 key_matrix[4][4] = {
+						{0x77,0x7b,0x7d,0x7e},
+						{0xb7,0xbb,0xbd,0xbe},
+						{0xd7,0xdb,0xdd,0xde},
+						{0xe7,0xeb,0xed,0xee}	
+						};  
+
+// 一维矩阵存储按照行扫描的方式
+u8 key_cows[4] = {0x7f,0xbf,0xdf,0xef};
+
+u8 value = 0; //全局变量value，用来跨全局传递按键数字
+
+//按键扫描函数，可循环扫描当前按下的按键位置，并将按下的按键位置信息放到全局变量value里面
+void scan_keys()
+{
+	u8 i,j;
+	//u8 key_value = 0;
+	for(i=0;i<4;i++)
+	{
+		KEY_MATRIX_PORT = key_cows[i];
+		if( KEY_MATRIX_PORT != key_cows[i] )//判断第一列按键是否按下
+		{
+				for(j=0;j<4;j++)
+			{
+				delay_10us(550);//消抖
+				if(KEY_MATRIX_PORT == key_matrix[i][j])
+				{
+					key_value = 4*i+j;
+				}
+			}
+		}
+	}
+}
+
+```
